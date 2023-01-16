@@ -1,33 +1,47 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
-
+import { Animator, ScrollContainer, ScrollPage, batch, Fade, FadeIn, FadeOut, Move, MoveIn, MoveOut, Sticky, StickyIn, StickyOut, Zoom, ZoomIn, ZoomOut } from "react-scroll-motion";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
+  const FadeUp = batch(Fade(), Move(), Sticky());  
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+<ScrollContainer>
+  <ScrollPage>
+    <Animator animation={batch(Fade(), Sticky(), MoveOut(0, -200))}>
+      <span style={{ fontSize: "30px" }}>Let me show you scroll animation 😀</span>
+    </Animator>
+  </ScrollPage>
+  <ScrollPage>
+    <Animator animation={ZoomInScrollOut}>
+      <span style={{ fontSize: "40px" }}>I'm FadeUpScrollOut ✨</span>
+    </Animator>
+  </ScrollPage>
+  <ScrollPage>
+    <Animator animation={FadeUp}>
+      <span style={{ fontSize: "40px" }}>I'm FadeUp ⛅️</span>
+    </Animator>
+  </ScrollPage>
+  <ScrollPage>
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }} >
+      <span style={{ fontSize: "40px" }}>
+        <Animator animation={MoveIn(-1000, 0)}>Hello Guys 👋🏻</Animator>
+        <Animator animation={MoveIn(1000, 0)}>Nice to meet you 🙋🏻‍♀️</Animator>
+        - I'm Dante Chun -
+        <Animator animation={MoveOut(1000, 0)}>Good bye ✋🏻</Animator>
+        <Animator animation={MoveOut(-1000, 0)}>See you 💛</Animator>
+      </span>
     </div>
+  </ScrollPage>
+  <ScrollPage>
+    <Animator animation={batch(Fade(), Sticky())}>
+      <span style={{ fontSize: "40px" }}>Done</span>
+      <br/>
+      <span style={{ fontSize: "30px" }}>
+        There's FadeAnimation, MoveAnimation, StickyAnimation, ZoomAnimation
+      </span>
+    </Animator>
+  </ScrollPage>
+</ScrollContainer>
   )
 }
 
